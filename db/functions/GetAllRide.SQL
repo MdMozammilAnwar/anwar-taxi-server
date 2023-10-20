@@ -35,12 +35,7 @@ BEGIN
             public.Ride r
         LEFT JOIN UserProfile up on up.pk_user_id = r.fk_driver_id 
         WHERE
-            r.fk_user_id = in_user_id
-            AND r.ride_status = 2
-            AND r.fk_driver_id IS NOT NULL
-            AND r.ride_time_by_driver > NOW()
-            AND up.fk_role_id=2
-            ;
+            r.fk_user_id = in_user_id;
     ELSIF fk_role_id = 2 THEN
         RETURN QUERY
         SELECT
@@ -59,11 +54,7 @@ BEGIN
             public.Ride r
         LEFT JOIN UserProfile dp on dp.pk_user_id = r.fk_user_id
         WHERE
-            r.fk_driver_id = in_user_id
-            AND r.ride_status = 2
-            AND r.ride_time_by_driver > NOW()
-            AND dp.fk_role_id=1
-            ;
+            r.fk_driver_id = in_user_id;
     END IF;
 END;
 $$ LANGUAGE plpgsql;
